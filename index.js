@@ -25,6 +25,10 @@ db.connect((err) => {
     }
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ message: 'Server healthy' });
+})
+
 // Route to get all journals
 app.get('/get-publications', (req, res) => {
     const { category, volume } = req.query;
