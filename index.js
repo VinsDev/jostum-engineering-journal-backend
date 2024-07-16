@@ -100,8 +100,8 @@ app.get('/get-publication/:id', (req, res) => {
     const sql = `
         SELECT p.*, c.name AS category_name, v.number AS volume_number, v.year AS volume_year
         FROM publications p
-        LEFT JOIN categories c ON p.categoryId = c.id
-        LEFT JOIN volumes v ON p.volumeId = v.id
+        LEFT JOIN categories c ON p."categoryId" = c.id
+        LEFT JOIN volumes v ON p."volumeId" = v.id
         WHERE p.id = $1
     `;
 
