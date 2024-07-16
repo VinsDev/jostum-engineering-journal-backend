@@ -33,8 +33,8 @@ app.get('/get-publications', (req, res) => {
     let sql = `
         SELECT p.*, c.name AS category_name, v.number AS volume_number, v.year AS volume_year
         FROM publications p
-        LEFT JOIN categories c ON p.categoryId = c.id
-        LEFT JOIN volumes v ON p.volumeId = v.id
+        LEFT JOIN categories c ON p."categoryId" = c.id
+        LEFT JOIN volumes v ON p."volumeId" = v.id
     `;
 
     // Prepare parameters array for filtering
@@ -42,16 +42,16 @@ app.get('/get-publications', (req, res) => {
 
     // Check if category filter is provided
     if (category) {
-        sql += ' WHERE p.categoryId = $1';
+        sql += ' WHERE p."categoryId" = $1';
         params.push(category);
     }
 
     // Check if volume filter is provided
     if (volume) {
         if (params.length === 0) {
-            sql += ' WHERE p.volumeId = $1';
+            sql += ' WHERE p."volumeId" = $1';
         } else {
-            sql += ' AND p.volumeId = $2';
+            sql += ' AND p."volumeId" = $2';
         }
         params.push(volume);
     }
@@ -73,8 +73,8 @@ app.get('/get-recent-publications', (req, res) => {
     const sql = `
         SELECT p.*, c.name AS category_name, v.number AS volume_number, v.year AS volume_year
         FROM publications p
-        LEFT JOIN categories c ON p.categoryId = c.id
-        LEFT JOIN volumes v ON p.volumeId = v.id
+        LEFT JOIN categories c ON p."categoryId" = c.id
+        LEFT JOIN volumes v ON p."volumeId" = v.id
         ORDER BY p.id DESC
         LIMIT 10
     `;
