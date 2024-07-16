@@ -176,7 +176,7 @@ app.get('/download-publication/:id', (req, res) => {
     const sql = `
         SELECT p.*, v.number AS volume_number, v.year AS volume_year
         FROM publications p
-        LEFT JOIN volumes v ON p.volumeId = v.id
+        LEFT JOIN volumes v ON p."volumeId" = v.id
         WHERE p.id = $1
     `;
 
